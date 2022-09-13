@@ -12,3 +12,7 @@ Enel ejemplo el archivo fue colocado en la carpeta /etc/crontabs/ .El cronjob pu
 Si el script detecta que hay enlace con etecsa (responde secure.etecsa.net) pero luego de postear el usuario/contraseña, no detecta internet (no responde 8.8.8.8) entonces, detiene el servicio de cronjobs. 
 
 Este ejemplo es para ser utilizando dentro de un router con OpenWRT. Pero puede funcionar en calquier ambiente Linux, ajustando apropiadamente el comando para detener el servicio de cronjobs.
+
+Espero sea ayuda!!! 
+
+Mi Telegram: @mhramos85

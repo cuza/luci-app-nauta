@@ -3,8 +3,8 @@
 #####################################################################
 # DATOS DE ACCESO A UTILIZAR (Conserva las comillas!!!)
 #####################################################################
-NOMBRE_USUARIO="203723102165@nautaplus"
-PASSWORD="3T3csa.."
+NOMBRE_USUARIO="usuario@nautaplus"
+PASSWORD="su_password"
 #####################################################################
  
  

@@ -9,7 +9,7 @@ Es importante darle permiso de ejecución al script una vez ubicado dentro de su
 En el ejemplo el archivo fue colocado en la carpeta /etc/crontabs/ .El cronjob pudiese ser configurado para ejecutarse cada 1 minuto: 
 
 ```shell
-* * * * * NAUTA_USER="usuario@nautaplus" NAUTA_PASS="su_password" /etc/crontabs/login.sh
+* * * * * NAUTA_USER="usuario@nautaplus" NAUTA_PASS="su_password" /etc/crontabs/login.sh 2>&1 | /usr/bin/logger -t nauta_login
 ```
 
 Si el script detecta que hay enlace con etecsa (responde secure.etecsa.net) pero luego de postear el usuario/contraseña, no detecta internet (no responde 8.8.8.8) entonces, detiene el servicio de cronjobs. 

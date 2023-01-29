@@ -32,7 +32,7 @@ if [[ $? -ne 0 ]]; then
   echo "Internet NO responde. Intentando conectar..."
 
   if ping -c 1 -W 10 secure.etecsa.net &>/dev/null; then
-    curl -k ${TARGET_URL} -d "${data}"
+    curl -s -k ${TARGET_URL} -d "${data}" | grep "alert" | grep -o '\(".*"\)'
     echo "El enlace con ETECSA responde correctamente. Verificando que ya se haya conectado Internet..."
 
     if ping -c 1 -W 10 ${VERIFICATION_SERVER} &>/dev/null; then

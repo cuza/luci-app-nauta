@@ -1,9 +1,7 @@
 #!/bin/bash
 
 for var in NAUTA_USER NAUTA_PASS; do
-  if [ -n "${!var:-}" ]; then
-    echo "$var tiene asignado ${!var}"
-  else
+  if [ -z "${!var:-}" ]; then
     echo "Error! La variable $var no está definida."
     exit 1
   fi
@@ -14,37 +12,36 @@ done
 ######################################################################
 TARGET_URL="https://secure.etecsa.net:8443/LoginServlet"
 
-# Set the internet server to be verified (Change this as needed)
-VERIFICATION_SERVER="8.8.8.8"
+# Set the internet server to be verified (Change this as needed) detectportal.firefox.com is a good alternative
+VERIFICATION_URL="captive.apple.com"
+VERIFICATION_RESPONSE="<HTML><HEAD><TITLE>Success</TITLE></HEAD><BODY>Success</BODY></HTML>"
 
 # Verification Timeout (seconds)
-VERIFICATION_TIMEOUT_IN_SECONDS=1
+VERIFICATION_TIMEOUT_IN_SECONDS=15
 
-# User Data
-data="username="${NAUTA_USER}"&&password="${NAUTA_PASS}
+# POST Data
+user_data="username=${NAUTA_USER}"
+passwd_data="password=${NAUTA_PASS}"
 
 # Checks if internet is reachable
-ping -c 1 -W ${VERIFICATION_TIMEOUT_IN_SECONDS} ${VERIFICATION_SERVER} &>/dev/null
-
-if [[ $? -ne 0 ]]; then
+if [[ $(curl -m ${VERIFICATION_TIMEOUT_IN_SECONDS} -s ${VERIFICATION_URL}) != "${VERIFICATION_RESPONSE}" ]]; then
   # Internet not detected,
   # post username and password to URL
   echo "Internet NO responde. Intentando conectar..."
 
-  if ping -c 1 -W 10 secure.etecsa.net &>/dev/null; then
-    curl -s -k ${TARGET_URL} -d "${data}" | grep "alert" | grep -o '\(".*"\)'
+  if curl -m ${VERIFICATION_TIMEOUT_IN_SECONDS} -s -k ${TARGET_URL} &>/dev/null; then
+    curl -s -k ${TARGET_URL} --data-urlencode "${user_data}" --data-urlencode "${passwd_data}" | grep "alert" | grep -o '\(".*"\)'
     echo "El enlace con ETECSA responde correctamente. Verificando que ya se haya conectado Internet..."
 
-    if ping -c 1 -W 10 ${VERIFICATION_SERVER} &>/dev/null; then
+    if [[ $(curl -m ${VERIFICATION_TIMEOUT_IN_SECONDS} -s ${VERIFICATION_URL}) == "${VERIFICATION_RESPONSE}" ]]; then
       echo "Internet se ha conectado CORRECTAMENTE"
     else
-      /etc/init.d/cron stop
-      echo "No fue posible conectarse. Deteniendo el servicio CRON"
+      echo "No ha sido posible iniciar sesión. Continuaremos intentando conectar..."
       exit 1
     fi
 
   else
-    echo "No hay conexion con ETECSA en estos momentos. No ha sido posible iniciar sesion. Continuaremos intentando conectar..."
+    echo "No hay conexion con ETECSA en estos momentos. No ha sido posible iniciar sesión. Continuaremos intentando conectar..."
     exit 1
   fi
 

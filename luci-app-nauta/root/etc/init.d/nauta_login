@@ -1,0 +1,12 @@
+#!/bin/sh /etc/rc.common
+ 
+START=99
+STOP=15
+ 
+start() {
+    /usr/bin/nauta_login --daemon 2>&1 | /usr/bin/logger -t nauta_login &
+}
+
+stop() {
+    /usr/bin/killall nauta_login
+}

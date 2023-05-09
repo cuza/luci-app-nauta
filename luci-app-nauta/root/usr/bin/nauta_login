@@ -65,10 +65,11 @@ if [ "$1" = "--daemon" ]; then
 else
   if [ "$NAUTA_AUTOLOGIN" != "1" ]; then
     echo "El autologin no está activado. No se intentará iniciar sesión."
-    exit
+    exit 1
   fi
   if [ -z "$NAUTA_USER" ] || [ -z "$NAUTA_PASS" ]; then
     echo "Usuario o contraseña no definidos. No se intentará iniciar sesión."
+    exit 1
   else
     login
   fi

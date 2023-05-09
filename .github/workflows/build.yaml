@@ -12,18 +12,20 @@ jobs:
     steps:
       - name: Checkout 
         uses: actions/checkout@v2
-      - uses: addnab/docker-run-action@v3
+      - name: Build package
+        uses: addnab/docker-run-action@v3
         with:
           image: openwrtorg/sdk
           options: -v ${{ github.workspace }}:/home/build/luci-app-nauta
           run: |
+            chmod 777 -R /home/build/luci-app-nauta
             bash -c "../luci-app-nauta/build.sh"
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: luci-app-nauta
           path: luci-app-nauta*.ipk
-      - name: release
+      - name: Create release
         if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:

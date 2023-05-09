@@ -1,0 +1,31 @@
+name: Build OpenWrt package
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+jobs:
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v2
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: openwrtorg/sdk
+          options: -v ${{ github.workspace }}:/home/build/luci-app-nauta
+          run: |
+            bash -c "../luci-app-nauta/build.sh"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: luci-app-nauta
+          path: luci-app-nauta*.ipk
+      - name: release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "luci-app-nauta*.ipk"
+          tag: ${{ github.ref }}

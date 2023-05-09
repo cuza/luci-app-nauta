@@ -32,4 +32,4 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "luci-app-nauta*.ipk"
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref_name }}

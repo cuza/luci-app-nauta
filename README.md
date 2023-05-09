@@ -1,19 +1,9 @@
-# login_nauta_etecsa
+# luci-app-nauta
 
-Este bash script permite correrlo mediante un crobjob dentro de su ordenador Linux o dentro de un router con OpenWRT y garantiza que la conexión a Internet con etecsa siempre se matenga activa.
-Es reomendado ejecutarlo cada 1 minuto.
-Olvídate de volver a iniciar sesión y disfruta la tarifa plana de NAUTAPLUS!!!
+Una app de LuCI que contiene un bash script ejecutandose cada minuto mediante un crobjob y garantiza que la conexión a Internet mediate portales captivos de ETECSA siempre se matenga activa.
+Olvídate de volver a iniciar sesión y disfruta la tarifa plana de Nauta PLUS!!!
 
-Es importante darle permiso de ejecución al script una vez ubicado dentro de su equipo: `chmod +x login.sh`
+Espero sea de ayuda!!! 
 
-En el ejemplo el archivo fue colocado en la carpeta /etc/crontabs/ .El cronjob pudiese ser configurado para ejecutarse cada 1 minuto: 
-
-```shell
-* * * * * NAUTA_USER="usuario@nautaplus" NAUTA_PASS="su_password" /etc/crontabs/login.sh 2>&1 | /usr/bin/logger -t nauta_login
-```
-
-Este ejemplo es para ser utilizando dentro de un router con OpenWRT. Pero puede funcionar en calquier ambiente Linux, ajustando apropiadamente el comando para detener el servicio de cronjobs.
-
-Espero sea ayuda!!! 
-
-Mi Telegram: @mhramos85
+## Acknowledgments
+ - Agradecimiento especial a **@Magdiel1985** ( [GitHub](https://github.com/Magdiel1985) | [Telegram](https://t.me/mhramos85) ) por [el cron job original](https://github.com/Magdiel1985/login_nauta_etecsa) en el cual se basa este proyecto

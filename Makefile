@@ -5,7 +5,7 @@ PKG_NAME:=luci-app-nauta
 
 PKG_LICENSE:=MIT License
 PKG_MAINTAINER:=Dave Cuza <dave@cuza.dev>
-PKG_VERSION:=v0.0.20
+PKG_VERSION:=v0.0.21
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
@@ -32,7 +32,7 @@ define Package/$(PKG_NAME)/prerm
 #!/bin/sh
 (crontab -l ; echo "* * * * * /usr/bin/nauta_login 2>&1 | /usr/bin/logger -t nauta_login") | grep -v nauta_login | sort | uniq | crontab -
 /etc/init.d/cron restart
-/usr/bin/killall nauta_login
+/usr/bin/killall nauta_login || true
 endef
 
 $(eval $(call BuildPackage,luci-app-nauta))

@@ -7,5 +7,12 @@ Olvídate de volver a iniciar sesión y disfruta la tarifa plana de Nauta PLUS!!
 
 Espero sea de ayuda!!!
 
+## Building
+Puede usar el Makefile para compilar localmente el paquete, esta operacion necesita docker instalado, para ello solo basta con correr:
+
+```bash
+make luci-app-nauta.ipk
+```
+
 ## Acknowledgments
  - Agradecimiento especial a **@Magdiel1985** ( [GitHub](https://github.com/Magdiel1985) | [Telegram](https://t.me/mhramos85) ) por [el cron job original](https://github.com/Magdiel1985/login_nauta_etecsa) en el cual se basa este proyecto

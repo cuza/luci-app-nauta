@@ -1,11 +1,8 @@
 include $(TOPDIR)/rules.mk
 
-include variables.Makefile
-
 include $(TOPDIR)/feeds/luci/luci.mk
 
-LUCI_DEPENDS:=@(aarch64||arm||i386||mips||mipsel||x86_64) +luci-compat +bash +curl
-LUCI_PKGARCH:=all
+include makefiles/variables.Makefile
 
 define Package/$(PKG_NAME)/Compile
 endef

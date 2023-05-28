@@ -10,7 +10,7 @@ make defconfig
 ./scripts/feeds install luci
 
 cp -R ../luci-app-nauta/ package/feeds/luci/
-mv package/feeds/luci/luci-app-nauta/OpenWRT.Makefile package/feeds/luci/luci-app-nauta/Makefile
+mv package/feeds/luci/luci-app-nauta/makefiles/OpenWRT.Makefile package/feeds/luci/luci-app-nauta/Makefile
 
 make package/luci-app-nauta/compile IGNORE_ERRORS=1 -j$(nproc) V=s
 

@@ -8,7 +8,7 @@ Olvídate de volver a iniciar sesión y disfruta la tarifa plana de Nauta PLUS!!
 Espero sea de ayuda!!!
 
 ## Building
-Puede usar el Makefile para compilar localmente el paquete, esta operacion necesita docker instalado, para ello solo basta con correr:
+Puede usar el Makefile para compilar localmente el paquete, esta operacion necesita docker instalado, para ello solo basta correr:
 
 ```bash
 make luci-app-nauta.ipk

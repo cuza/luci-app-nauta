@@ -1,4 +1,3 @@
-
 include makefiles/variables.Makefile
 
 PHONY: release

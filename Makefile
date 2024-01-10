@@ -8,4 +8,4 @@ release:
 	git push --atomic origin main $(PKG_VERSION)
 
 luci-app-nauta.ipk:
-	docker run --rm -v $$(pwd):/home/build/$(PKG_NAME) openwrtorg/sdk bash -c ../$(PKG_NAME)/build.sh
+	docker run --rm -v $$(pwd):/$(PKG_NAME) openwrt/sdk bash -c ../$(PKG_NAME)/build.sh

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # you can also use the following command to build the package:
-# docker run --rm -v "$(pwd)":/home/build/luci-app-nauta openwrtorg/sdk bash -c "../luci-app-nauta/build.sh"
+# docker run --rm -v "$(pwd)":/luci-app-nauta openwrt/sdk bash -c "../luci-app-nauta/build.sh"
 
 ./scripts/feeds update luci
 
